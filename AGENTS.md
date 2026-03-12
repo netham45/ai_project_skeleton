@@ -25,6 +25,39 @@ Treat stage-specific requirements as belonging to the lifecycle notes and operat
 
 Do not claim statuses or proving levels that the current stage and its completed sub-steps do not justify.
 
+## Lifecycle Progression Rule
+
+`AGENTS.md` defines the always-on doctrine for the repository.
+
+As the lifecycle progresses, the repository's standards should become stricter through the lifecycle notes, operational-state checklist, and governing task plans rather than by silently changing contributor expectations in chat history.
+
+Use the lifecycle artifacts this way:
+
+- `AGENTS.md` defines the permanent cross-stage rules, system model, proving doctrine, and update obligations.
+- `notes/lifecycle/*.md` define the stage-specific standards, required artifacts, common failure modes, and exit conditions.
+- `plan/checklists/00_project_operational_state.md` records which stage and sub-steps are actually active.
+- `plan/tasks/*.md` define the concrete work package and canonical verification commands for the current batch.
+
+When the lifecycle advances, contributors should update the stage-governance artifacts that changed and update `AGENTS.md` only when the always-on doctrine changed too.
+
+Examples:
+
+- if a new lifecycle stage is added, update the lifecycle overview, the affected stage notes, and the operational-state checklist; update `AGENTS.md` only if the standing governance model changed
+- if a new primary system, permanent proving rule, or global completion rule is adopted, update `AGENTS.md` as part of the same change
+- if only a stage-specific expectation changed, keep that detail in the stage notes and checklists instead of bloating `AGENTS.md`
+
+## Lifecycle Maturity Ladder
+
+Use this shorthand to understand how repository expectations tighten over time:
+
+- `genesis`: define mission, systems, stack direction, unknowns, and bootstrap governance
+- `architecture`: define authority, durability, boundary lines, and stack ownership
+- `product definition`: define major flows, feature outlines, contracts, domain model, operator surfaces, and implementation slices
+- `setup`: create the scaffold and bounded-proof surface for the defined starter scope
+- `feature delivery`: implement features against the defined contracts while keeping plans, logs, checklists, and notes aligned
+- `hardening and end-to-end proof`: prove the intended runtime narratives through real boundaries and revisit resilience, performance, and audit expectations
+- `post-v1 evolution`: reopen only the lifecycle obligations affected by the new workstream
+
 ## Core Implementation Model
 
 Every feature must be considered across the repository's declared primary systems.

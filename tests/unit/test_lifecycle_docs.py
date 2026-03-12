@@ -6,6 +6,28 @@ LIFECYCLE_DIR = REPO_ROOT / "notes" / "lifecycle"
 PRODUCT_SPECS_DIR = REPO_ROOT / "notes" / "specs" / "product"
 
 
+def test_agents_doc_defines_lifecycle_progression_model() -> None:
+    text = (REPO_ROOT / "AGENTS.md").read_text(encoding="utf-8")
+
+    assert "## Lifecycle Governance Rule" in text
+    assert "## Lifecycle Progression Rule" in text
+    assert "## Lifecycle Maturity Ladder" in text
+    assert "`AGENTS.md` defines the always-on doctrine" in text
+    assert "`notes/lifecycle/*.md` define the stage-specific standards" in text
+    assert "`plan/checklists/00_project_operational_state.md` records which stage" in text
+    assert "`plan/tasks/*.md` define the concrete work package" in text
+    for stage_name in [
+        "`genesis`",
+        "`architecture`",
+        "`product definition`",
+        "`setup`",
+        "`feature delivery`",
+        "`hardening and end-to-end proof`",
+        "`post-v1 evolution`",
+    ]:
+        assert stage_name in text
+
+
 def test_lifecycle_overview_lists_product_definition_stage() -> None:
     text = (LIFECYCLE_DIR / "00_project_lifecycle_overview.md").read_text(encoding="utf-8")
 

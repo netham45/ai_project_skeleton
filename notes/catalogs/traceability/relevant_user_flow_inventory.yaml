@@ -1,19 +1,94 @@
 flows:
+  - flow_id: FLOW00
+    name: define_architecture_boundaries
+    kind: operator
+    status: planned
+    summary: Convert the project concept into explicit authority, durability, stack, and code-vs-config boundaries.
+    governing_notes:
+      - notes/lifecycle/02_stage_01_architecture.md
+      - notes/specs/architecture/authority_and_api_model.md
+      - notes/specs/architecture/code_vs_config_delineation.md
+    expected_systems:
+      - database
+      - cli
+      - daemon
+      - config
+      - prompts
+      - website_ui
+      - notes
+    key_invariants:
+      - runtime authority may not be implied by YAML or starter scaffolding
+      - stack choices must be explicit or explicitly undecided
+    acceptance_summary: Architecture exits only when contributors no longer have to guess which system owns authority, durability, and policy.
+    bounded_proof:
+      - review lifecycle and architecture notes
+    e2e_target: not_applicable
   - flow_id: FLOW01
     name: bootstrap_the_repository
     kind: operator
     status: planned
     summary: Create the initial scaffold, governing artifacts, and first bounded verification command.
     governing_notes:
-      - notes/lifecycle/03_stage_02_setup.md
+      - notes/lifecycle/04_stage_03_setup.md
       - notes/catalogs/checklists/verification_command_catalog.md
     expected_systems:
       - notes
       - plans
       - checklists
       - tests
+    key_invariants:
+      - setup must reflect already-defined product contracts rather than inventing them
+      - bounded setup proof must not be described as real E2E completion
+    acceptance_summary: The starter repo has a real scaffold, a real bounded command, and honest documentation about missing stronger proof.
     bounded_proof:
-      - python3 -m pytest tests/unit/test_bootstrap_docs.py -q
+      - python3 -m pytest ai_project_skeleton/tests/unit/test_lifecycle_docs.py -q
+    e2e_target: planned
+  - flow_id: FLOW03
+    name: define_major_user_and_operator_flows
+    kind: operator
+    status: planned
+    summary: Define the starter user and operator journeys, their system touchpoints, and the proof targets that will later exercise them.
+    governing_notes:
+      - notes/lifecycle/03_stage_02_product_definition.md
+      - notes/catalogs/traceability/spec_traceability_matrix.md
+    expected_systems:
+      - database
+      - cli
+      - daemon
+      - config
+      - prompts
+      - website_ui
+      - notes
+    key_invariants:
+      - every major flow must name the affected systems explicitly
+      - every claimed flow must name a bounded proof surface and a real E2E target or an honest not-applicable reason
+    acceptance_summary: Product definition is not complete until the major journeys are written down with their ownership and proof posture.
+    bounded_proof:
+      - python3 -m pytest ai_project_skeleton/tests/unit/test_lifecycle_docs.py -q
+    e2e_target: tests/e2e/test_e2e_first_flow.py
+  - flow_id: FLOW04
+    name: define_feature_and_processing_contracts
+    kind: operator
+    status: planned
+    summary: Define the starter feature outline, processing-system contracts, operator surfaces, and domain model that setup will implement.
+    governing_notes:
+      - notes/lifecycle/03_stage_02_product_definition.md
+      - notes/specs/product/processing_system_contracts.md
+      - notes/specs/product/operator_surface_map.md
+    expected_systems:
+      - database
+      - cli
+      - daemon
+      - config
+      - prompts
+      - website_ui
+      - notes
+    key_invariants:
+      - contract notes must state inputs, outputs, failures, and proof surfaces rather than only naming features
+      - domain vocabulary must be consistent across flow, feature, and traceability assets
+    acceptance_summary: Setup can begin only after the starter feature and processing contracts are explicit enough to scaffold against.
+    bounded_proof:
+      - python3 -m pytest ai_project_skeleton/tests/unit/test_lifecycle_docs.py -q
     e2e_target: planned
   - flow_id: FLOW02
     name: run_first_real_user_or_operator_narrative
@@ -22,12 +97,17 @@ flows:
     summary: Exercise the first real runtime flow through the true system boundaries the repository intends to claim.
     governing_notes:
       - notes/catalogs/checklists/e2e_execution_policy.md
-      - notes/lifecycle/05_stage_04_hardening_and_e2e.md
+      - notes/lifecycle/06_stage_05_hardening_and_e2e.md
     expected_systems:
       - database
       - cli
       - daemon
       - config
       - prompts
+      - website_ui
+    key_invariants:
+      - the live runtime must perform the workflow steps being claimed
+      - synthetic progression may not be counted as E2E coverage
+    acceptance_summary: A named runtime narrative passes through its real system boundaries for the stated scope.
     bounded_proof: []
     e2e_target: tests/e2e/test_e2e_first_flow.py

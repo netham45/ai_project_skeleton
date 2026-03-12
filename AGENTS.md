@@ -198,9 +198,11 @@ Bounded, simulated, mocked, or fixture-assisted tests are required during implem
 
 ### Stage 2: Real End-To-End Proof
 
-Features intended to exist in real runtime usage must progress to full real E2E proof through the relevant system boundaries.
+Every feature intended to exist in real runtime usage must progress to full real E2E proof through the relevant system boundaries.
 
 Bounded tests do not count as final completion proof for real runtime behavior.
+
+There is no feature so small, simple, or low-risk that it is exempt from real E2E coverage.
 
 No feature is complete without full real E2E tests for its intended scope.
 
@@ -223,6 +225,8 @@ unless the real E2E layer has been completed for the intended scope.
 Every feature must be exercisable in real code.
 
 Every meaningful feature must map to at least one explicit real E2E test target.
+
+There is no feature too small to require a real E2E test.
 
 Grouped or batched E2E narratives are acceptable, but traceability is still required.
 
@@ -273,7 +277,7 @@ The following are forbidden in any test that is claimed as E2E coverage for a wo
 - hidden helper behavior that performs the workflow step off-screen and then exposes only the end result
 - using a lower-layer proof to stand in for a higher-layer E2E claim
 
-If any of those are present, the test must be moved to the correct lower layer or treated explicitly as a non-canonical bring-up target rather than passing E2E proof.
+If any of those are present, the workflow is not E2E-covered. The required remediation is to remove the simulation or shortcut and make the test perform the real workflow through the live runtime path. Do not delete, skip, or permanently downgrade the E2E requirement because the test is difficult.
 
 ### E2E Naming And Claim Rule
 
@@ -283,9 +287,13 @@ The fact that a harness uses real infrastructure does not make the test E2E if a
 
 If a file under `tests/e2e/` is only a bring-up target, partially simulated narrative, or bounded or operator-assisted proof, that status must be stated explicitly and it must be excluded from canonical passing E2E command sets.
 
+Simulation and E2E are opposites in this repository. A simulated workflow may still be useful at a lower layer, but it is never a substitute for the required real E2E proof and it does not reduce the obligation to implement that proof.
+
 ## Completion Standard
 
 No feature or change is complete without tests.
+
+No feature is small enough to be excused from full real E2E proof.
 
 A feature is complete only when all of the following are true:
 
@@ -417,6 +425,8 @@ Use end-to-end tests for:
 
 Critical end-to-end flows must not simulate away the core behavior being claimed.
 
+Simulation and E2E are antonyms in this repository: if a workflow step is simulated, injected, forced, or skipped, the test is not E2E.
+
 For avoidance of doubt:
 
 - an E2E test must execute the workflow as a live run would execute it
@@ -427,6 +437,8 @@ For avoidance of doubt:
 An E2E test that mixes real boundaries with synthetic workflow progression is defective and must not be counted as E2E proof.
 
 E2E is the final required proving layer for any feature that is supposed to exist in real runtime behavior.
+
+Do not remove, skip, or waive E2E coverage because implementation is difficult. The correct response to a defective simulated E2E is to make the test run the real workflow.
 
 Real-runtime resource needs such as ports, workspaces, databases, browsers, terminals, tokens, source-control repositories, or external-service sandboxes must be isolated so eligible E2E tests can run concurrently.
 

@@ -31,4 +31,4 @@ Architecture converts the initial concept into explicit system boundaries, durab
 
 ## Exit Condition
 
-This stage is complete enough to exit when setup work can begin without contributors having to guess where authority, durability, and policy belong.
+This stage is complete enough to exit when product-definition work can begin without contributors having to guess where authority, durability, policy, and stack ownership belong.

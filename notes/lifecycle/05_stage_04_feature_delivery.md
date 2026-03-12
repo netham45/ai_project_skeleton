@@ -1,8 +1,8 @@
-# Stage 03: Feature Delivery
+# Stage 04: Feature Delivery
 
 ## Purpose
 
-Feature delivery is where the repository starts shipping real capability while keeping plans, logs, notes, checklists, and bounded proof aligned.
+Feature delivery is where the repository starts shipping real capability from the defined feature and flow contracts while keeping plans, logs, notes, checklists, and bounded proof aligned.
 
 ## Required Outcomes
 

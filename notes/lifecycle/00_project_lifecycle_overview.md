@@ -8,10 +8,11 @@ The default stage sequence is:
 
 1. genesis
 2. architecture
-3. setup
-4. feature delivery
-5. hardening and end-to-end proof
-6. post-v1 evolution
+3. product definition
+4. setup
+5. feature delivery
+6. hardening and end-to-end proof
+7. post-v1 evolution
 
 ## Core Rule
 
@@ -62,10 +63,17 @@ Checklist and command-catalog notes define proving and status discipline.
 
 - `01_stage_00_genesis.md`
 - `02_stage_01_architecture.md`
-- `03_stage_02_setup.md`
-- `04_stage_03_feature_delivery.md`
-- `05_stage_04_hardening_and_e2e.md`
-- `06_stage_05_post_v1_evolution.md`
+- `03_stage_02_product_definition.md`
+- `04_stage_03_setup.md`
+- `05_stage_04_feature_delivery.md`
+- `06_stage_05_hardening_and_e2e.md`
+- `07_stage_06_post_v1_evolution.md`
+
+## Stage Boundaries
+
+- Architecture decides boundaries, authority, durability, and stack direction.
+- Product definition turns those boundaries into major flows, feature outlines, system contracts, and proof targets.
+- Setup creates the runnable scaffold and bounded-proof surface that implements the defined starter shape.
 
 ## Exit Condition
 

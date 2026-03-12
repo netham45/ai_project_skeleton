@@ -1,4 +1,4 @@
-# Stage 04: Hardening And End-To-End Proof
+# Stage 05: Hardening And End-To-End Proof
 
 ## Purpose
 

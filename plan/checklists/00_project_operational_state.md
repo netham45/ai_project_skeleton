@@ -27,7 +27,8 @@ Use this checklist to:
 | State | Status | Current stage? | Acceptance summary | Proof summary | Blocked stronger claims | Advance when |
 | --- | --- | --- | --- | --- | --- | --- |
 | `genesis` | in_progress | yes | Mission, systems, initial invariants, and bootstrap governance are being established. | Artifact creation and early document checks are expected first. | `verified`, `flow_complete`, `release_ready` | Architecture inputs are explicit and governed. |
-| `architecture_defined` | planned | no | Boundaries, durable state, code-vs-config lines, and command surfaces are documented. | Architecture notes and command catalog exist. | `flow_complete`, `release_ready` | Setup can begin without guessing system boundaries. |
+| `architecture_defined` | planned | no | Boundaries, durable state, code-vs-config lines, and command surfaces are documented. | Architecture notes and command catalog exist. | `flow_complete`, `release_ready` | Product-definition work can begin without guessing system boundaries. |
+| `product_defined` | planned | no | Major flows, feature outlines, system contracts, and proof targets are documented. | Product-definition notes, inventories, and traceability surfaces exist. | `flow_complete`, `release_ready` | Setup can begin without inventing the product shape ad hoc. |
 | `setup_bootstrapped` | planned | no | Scaffold, starter tests, governing artifacts, and bounded proof exist. | Bounded commands pass from a clean shell. | `flow_complete`, `release_ready` | Feature work can proceed without ad hoc process invention. |
 | `feature_delivery_ready` | planned | no | Task plans, logs, checklists, and note maintenance operate reliably for feature work. | A real feature slice is governed and bounded-tested. | `flow_complete`, `release_ready` | Features can ship under consistent doctrine. |
 | `bounded_verified` | blocked | no | Bounded proof discipline exists across the active scope. | Current bounded commands and doc checks pass. | `flow_complete`, `release_ready` | Active features are honestly proven at the bounded layer. |
@@ -86,3 +87,72 @@ Use this checklist to:
   - this file
 - Advance when:
   - the repo has a durable stage rollup surface
+
+## Upcoming Stage Sub-Steps
+
+### `product_definition.define_major_user_flows`
+
+- Status: `planned`
+- Required artifacts:
+  - `notes/catalogs/traceability/relevant_user_flow_inventory.yaml`
+- Advance when:
+  - the major operator and user flows are explicit, scoped, and mapped to systems
+
+### `product_definition.define_major_features`
+
+- Status: `planned`
+- Required artifacts:
+  - `notes/catalogs/inventory/major_feature_inventory.md`
+- Advance when:
+  - the starter feature set has stable IDs, summaries, dependencies, and proof targets
+
+### `product_definition.define_feature_contracts`
+
+- Status: `planned`
+- Required artifacts:
+  - `notes/specs/product/feature_contract_template.md`
+- Advance when:
+  - the starter contract model covers triggers, inputs, outputs, failures, and proof surfaces
+
+### `product_definition.define_processing_system_contracts`
+
+- Status: `planned`
+- Required artifacts:
+  - `notes/specs/product/processing_system_contracts.md`
+- Advance when:
+  - background processing, retries, idempotency, and ownership boundaries are outlined explicitly
+
+### `product_definition.define_domain_model`
+
+- Status: `planned`
+- Required artifacts:
+  - `notes/specs/product/domain_model_outline.md`
+  - `notes/specs/product/canonical_vocabulary.md`
+- Advance when:
+  - the starter entities, state language, and durable records are defined consistently
+
+### `product_definition.define_operator_surfaces`
+
+- Status: `planned`
+- Required artifacts:
+  - `notes/specs/product/operator_surface_map.md`
+- Advance when:
+  - the CLI and website UI surfaces are outlined for the intended scope, or marked not applicable explicitly
+
+### `product_definition.define_implementation_slices`
+
+- Status: `planned`
+- Required artifacts:
+  - `notes/specs/product/implementation_slicing_guide.md`
+  - `notes/specs/product/feature_delivery_map.md`
+- Advance when:
+  - each starter feature has an initial implementation slice, dependency order, and intended delivery posture
+
+### `product_definition.establish_traceability_and_proof_targets`
+
+- Status: `planned`
+- Required artifacts:
+  - `notes/catalogs/traceability/spec_traceability_matrix.md`
+  - `notes/catalogs/checklists/verification_command_catalog.md`
+- Advance when:
+  - goals, flows, features, and proof targets are linked without implicit gaps

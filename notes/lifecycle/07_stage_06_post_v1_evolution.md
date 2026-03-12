@@ -1,4 +1,4 @@
-# Stage 05: Post-V1 Evolution
+# Stage 06: Post-V1 Evolution
 
 ## Purpose
 

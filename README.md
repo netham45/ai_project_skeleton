@@ -1,31 +1,45 @@
-# Draft Starter Repo
+# AI Project Skeleton
 
-This folder is a draft of the separate repository users would clone to start a new project under this operating model.
+This folder is a released starter repository for teams that want to begin a new AI-assisted project under the governance model used by this repo.
 
-It is intentionally a starter scaffold, not a finished product template.
+It is a project skeleton, not a finished application template.
 
-The goals of this draft are:
+Its purpose is to provide a concrete starting shape for:
 
-- make the starter repo reviewable as a concrete artifact
-- preserve the current repository's core discipline in a generic form
-- show a more realistic `notes/` tree than a bare placeholder skeleton
-- give future generator work a stable rendered target
+- lifecycle-driven planning
+- notes-as-implementation discipline
+- checklist and log requirements
+- traceability and verification command tracking
+- bounded-test and later E2E-proof expectations
 
-This draft is intentionally stack-agnostic.
+The skeleton is intentionally stack-agnostic at release time.
 
-It defines process, lifecycle, and documentation discipline first.
+It ships the operating model, repository shape, and governance artifacts first. The cloned project is expected to record its real stack choices during genesis and architecture instead of inheriting them silently.
 
-The actual language, framework, database, UI, and testing-tool choices are expected to be written down by the cloned repository during genesis and architecture rather than inherited implicitly from this starter.
+This released skeleton also serves as the concrete reference target for the future project-skeleton generator work under `plan/future_plans/project_skeleton_generator/`. That future-plan material is still non-authoritative planning; this folder is the consumable starter artifact.
 
-The most important files to review first are:
+Start with these files:
 
 - `AGENTS.md`
 - `notes/lifecycle/00_project_lifecycle_overview.md`
-- `notes/specs/architecture/stack_decision_record.md`
 - `plan/checklists/00_project_operational_state.md`
+- `notes/specs/architecture/stack_decision_record.md`
 - `notes/catalogs/checklists/verification_command_catalog.md`
 - `notes/catalogs/inventory/system_inventory.md`
 
-This draft is not an implementation claim for a generator.
+Repository layout:
 
-It is the concrete repository shape the future generator would eventually need to render.
+- `notes/`: lifecycle, architecture, inventories, checklists, traceability, and development logs
+- `plan/`: setup, task, feature, checklist, and future-plan surfaces
+- `code/`: product implementation area
+- `simulations/`: bounded-proof fixtures and harness artifacts
+- `tests/`: unit, integration, and E2E proving surfaces
+
+What this skeleton does not claim:
+
+- a chosen application stack
+- completed runtime behavior
+- a generated repository pipeline
+- release-ready proof for any specific product
+
+Use it when you want the repository discipline already in place before substantive implementation begins.

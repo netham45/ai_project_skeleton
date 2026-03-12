@@ -202,13 +202,86 @@ Features intended to exist in real runtime usage must progress to full real E2E 
 
 Bounded tests do not count as final completion proof for real runtime behavior.
 
+No feature is complete without full real E2E tests for its intended scope.
+
+If full E2E proof does not yet exist, the feature may be labeled:
+
+- `implemented`
+- `in_progress`
+- `partial`
+
+It may not be labeled:
+
+- `complete`
+- `flow_complete`
+- `release_ready`
+
+unless the real E2E layer has been completed for the intended scope.
+
 ## E2E Coverage Rule
+
+Every feature must be exercisable in real code.
 
 Every meaningful feature must map to at least one explicit real E2E test target.
 
-Grouped E2E narratives are acceptable, but traceability is still required.
+Grouped or batched E2E narratives are acceptable, but traceability is still required.
+
+One E2E file per feature is not required.
 
 If the strongest proof still bypasses the core runtime boundary being claimed, the feature is not E2E-covered.
+
+A feature is not E2E-covered if its strongest proof still relies on:
+
+- fake backends or fake session layers
+- in-process runtime bridges as the only proof
+- direct durable-state mutation to skip runtime work
+- synthetic prompt, summary, result, or equivalent workflow injection
+- staged placeholders instead of real source-control, session, provider, external-service, or environment behavior where the feature depends on those boundaries
+
+If a feature depends on another feature, both may share one E2E narrative, but both must be tracked explicitly as covered by that E2E suite.
+
+### Live-Run Equivalence Rule
+
+Any test claimed as E2E must test every claimed workflow component as if it were being used in a real live run.
+
+This rule is absolute.
+
+For repository claim purposes, a test is not E2E unless:
+
+- every claimed workflow step happens through the same runtime boundary used in real operation
+- every claimed component is exercised through its real role in that workflow
+- the test waits for the real system to perform the work being claimed
+- the asserted outcome is the result of that real runtime path rather than a shortcut or injected state
+
+There is no acceptable "mostly real" interpretation.
+
+If even one claimed workflow step is skipped, forced, injected, mocked, manually advanced, or satisfied through a lower-layer shortcut, the test must not be treated as E2E coverage for that workflow.
+
+### Forbidden In E2E Rule
+
+The following are forbidden in any test that is claimed as E2E coverage for a workflow:
+
+- fake backends or fake session layers
+- direct durable-state mutation to force the workflow into a later state
+- in-process runtime bridges as the strongest proof
+- synthetic prompt, summary, result, session, or equivalent workflow injection
+- direct API or RPC completion shortcuts such as a test-only "complete step" endpoint
+- test-side `task start`, `task complete`, or `task fail` actions when those actions are supposed to come from live runtime behavior
+- test-side `summary register` or equivalent result-publication shortcuts when the summary or result is supposed to be produced by the live runtime
+- test-side `workflow advance` or equivalent transition forcing when the runtime is supposed to advance the workflow itself
+- manual descendant or child creation in a test that claims the AI or runtime created those descendants itself
+- hidden helper behavior that performs the workflow step off-screen and then exposes only the end result
+- using a lower-layer proof to stand in for a higher-layer E2E claim
+
+If any of those are present, the test must be moved to the correct lower layer or treated explicitly as a non-canonical bring-up target rather than passing E2E proof.
+
+### E2E Naming And Claim Rule
+
+No test, note, checklist, command catalog, plan, review, or assistant response may describe a workflow as E2E-covered, real-E2E-passing, `flow_complete`, or equivalent unless the exact live-run-equivalent workflow has actually been rerun and passed.
+
+The fact that a harness uses real infrastructure does not make the test E2E if any claimed workflow step is still synthetic.
+
+If a file under `tests/e2e/` is only a bring-up target, partially simulated narrative, or bounded or operator-assisted proof, that status must be stated explicitly and it must be excluded from canonical passing E2E command sets.
 
 ## Completion Standard
 
@@ -229,11 +302,13 @@ A feature is complete only when all of the following are true:
 - those commands were actually run for the claimed layer
 - known limitations are documented explicitly
 
+No feature is complete without full real E2E proof for its intended scope.
+
 ## Completion State Vocabulary
 
 Use these terms deliberately:
 
-- `implemented`: assets or code exist, but stronger proof may still be missing
+- `implemented`: assets or code exist and bounded proof may exist, but full real E2E proof is not yet complete
 - `verified`: the documented verification command for the claimed layer actually passed
 - `partial`: some intended behavior exists, but limitations or missing proving layers remain
 - `flow_complete`: the intended user or operator flow passed end to end for the declared scope
@@ -243,18 +318,150 @@ Do not describe work as complete if it is only implemented.
 
 ## Testing Standard
 
-Tests must be written at the correct layer and remain parallel-safe when their required capabilities are present.
+Tests must be all-encompassing for meaningful behavior.
 
-Test categories include:
+All tests are expected to be runnable in parallel.
 
-- unit and bounded tests
-- integration tests
-- end-to-end tests
-- document consistency tests
-- performance tests
-- resilience tests
+Test isolation is part of correctness, not optional hardening.
 
-If a test passes only when run serially because of shared mutable state, fixture contention, or cross-test interference, that is a defect.
+A test that passes only when run serially and fails because of parallel execution, shared mutable state, fixture contention, resource collision, or cross-test interference is defective and must be treated as an issue to fix.
+
+External capability gating is a separate concern.
+
+It is acceptable to gate tests on genuinely unavailable requirements such as source-control tooling, provider credentials, external services, browsers, terminals, or similar explicit environment capabilities.
+
+It is not acceptable to normalize serial-only execution because the test or fixture design is not parallel-safe.
+
+That includes:
+
+- normal behavior
+- invalid inputs
+- boundary cases
+- failure paths
+- pause paths
+- retry paths
+- recovery paths
+- persistence behavior
+- database behavior where applicable
+- CLI behavior where applicable
+- backend or daemon behavior where applicable
+- config compilation behavior where applicable
+- prompt-contract behavior where applicable
+- auditability and inspectability expectations
+- concurrency behavior where relevant
+- idempotency where relevant
+- migration or compatibility behavior where relevant
+- authentication and authorization behavior where relevant
+
+Bounded tests are required during initial implementation and code review.
+
+Full real E2E tests are required before final completion.
+
+Authoritative document-family consistency tests are required wherever document families are part of the implementation surface.
+
+If a feature mutates durable state, the mutation rules must be tested through the real persistence layer where applicable, not only through mocked or in-memory paths.
+
+If a feature depends on ordering, concurrency, retries, recovery behavior, CLI contracts, backend contracts, config compilation, prompt delivery, or other real runtime boundaries, those semantics must be tested explicitly at the proper system boundary.
+
+If a feature is difficult to test, that is a sign the design or implementation should be improved until it becomes testable.
+
+## Test Layer Contracts
+
+Tests must be written intentionally at the correct layer.
+
+Parallel-safety applies at every layer.
+
+Unit, integration, performance, resilience, document-consistency, and end-to-end tests should all be able to coexist under parallel execution when their required environment capabilities are present.
+
+Layer choice is not an excuse for shared mutable fixtures or cross-test interference.
+
+### Unit And Bounded Tests
+
+Use these tests for:
+
+- branch logic
+- validation rules
+- state-machine legality
+- transformation logic
+- invariant enforcement
+- failure classification
+- prompt or rendering contracts
+- small persistence rules with narrow scope
+- fast review-time feedback during implementation
+
+These tests are required during initial implementation but are not final completion proof for real runtime behavior.
+
+They must still be parallel-safe and must not rely on shared mutable process, filesystem, database, schema, or environment state.
+
+### Integration Tests
+
+Use integration tests for:
+
+- boundaries between major subsystems
+- migrations
+- runtime coordination across modules
+- config compilation and runtime policy application
+- audit, history, and provenance persistence
+- auth, session, or external-service boundaries
+- flow slices that cross major subsystem boundaries
+
+### End-To-End Tests
+
+Use end-to-end tests for:
+
+- real user or operator flows
+- real process or service boundaries
+- real persistence and recovery behavior
+- real source-control, session, provider, or external-service coordination where applicable
+- full setup-to-outcome flows with no fake skipping of critical boundaries
+
+Critical end-to-end flows must not simulate away the core behavior being claimed.
+
+For avoidance of doubt:
+
+- an E2E test must execute the workflow as a live run would execute it
+- every component named by the workflow must be exercised in that live-run-equivalent path
+- if the runtime is supposed to create, advance, summarize, merge, recover, finalize, or otherwise progress something, the E2E must wait for the runtime to do exactly that
+- if an operator surface is the thing being tested, the E2E may use that real operator surface, but it may not use hidden lower-layer shortcuts to fake the rest of the workflow
+
+An E2E test that mixes real boundaries with synthetic workflow progression is defective and must not be counted as E2E proof.
+
+E2E is the final required proving layer for any feature that is supposed to exist in real runtime behavior.
+
+Real-runtime resource needs such as ports, workspaces, databases, browsers, terminals, tokens, source-control repositories, or external-service sandboxes must be isolated so eligible E2E tests can run concurrently.
+
+### Document Consistency Tests
+
+Use document consistency tests for:
+
+- required document structure
+- status vocabulary enforcement
+- feature, checklist, and E2E mapping integrity
+- command reference consistency
+- required section and field presence
+- document-family-specific invariants
+
+### Performance Tests
+
+Use performance tests for:
+
+- repeated inspection or query paths
+- compilation cost
+- runtime scheduling or coordination overhead
+- durable-store query efficiency
+- startup and recovery overhead
+- any path explicitly designated performance-sensitive
+
+### Resilience Tests
+
+Use resilience tests for:
+
+- interruption
+- restart
+- retry after partial completion
+- duplicate request handling
+- stale-session or stale-runtime recovery
+- durable audit and recovery correctness after failure
 
 ## Risk-Based Testing Rule
 

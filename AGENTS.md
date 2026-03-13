@@ -25,6 +25,54 @@ Treat stage-specific requirements as belonging to the lifecycle notes and operat
 
 Do not claim statuses or proving levels that the current stage and its completed sub-steps do not justify.
 
+After any `/compact` or equivalent context-compaction event, re-read the full lifecycle-governance state before resuming work.
+
+That re-read must include:
+
+- `notes/lifecycle/00_project_lifecycle_overview.md`
+- the current lifecycle stage note under `notes/lifecycle/`
+- `plan/checklists/00_project_operational_state.md`
+- the currently governing task plan under `plan/tasks/`, if one exists for the active work
+
+Do not rely on pre-compact memory, earlier commentary summaries, or inferred momentum to continue lifecycle-governed work after compaction.
+
+## First Unchecked Item Rule
+
+For lifecycle-governed work, always begin by identifying:
+
+- the active lifecycle stage from `plan/checklists/00_project_operational_state.md`
+- the first unchecked, unverified, or still-in-progress item in that active stage
+
+That first incomplete item is the only valid starting point.
+
+Do not select a later item because it seems more efficient, more important, or more convenient.
+
+Do not infer a better ordering from chat context if the governing checklist already establishes the order.
+
+If the first incomplete item is ambiguous, resolve that ambiguity from the repository artifacts before editing anything else.
+
+## Single Checklist Item Execution Rule
+
+When work is being driven by a lifecycle checklist, stage checklist, readiness checklist, or other governing checklist, complete exactly one checklist item per edit batch.
+
+A single edit batch means the smallest coherent set of file changes required to complete one checklist item honestly.
+
+Do not combine multiple checklist items into one pass, even if they appear adjacent, small, or closely related.
+
+Do not update downstream artifacts "while you are there" unless the current checklist item explicitly requires those updates for its own completion.
+
+If one checklist item reveals another missing prerequisite, finish and record the current item honestly, then move to the newly determined next item in a separate edit batch.
+
+## Autonomous Continuation Rule
+
+"One checklist item at a time" does not mean "stop after one checklist item."
+
+Unless blocked by missing information, a hard repository constraint, or an explicit user pause, continue autonomously from the current completed checklist item to the next single incomplete checklist item within the same turn.
+
+Do not end the turn merely to announce the next step.
+
+Do not wait for user confirmation between sequential checklist items unless the user explicitly asked for that stop-and-wait behavior.
+
 ## Lifecycle Progression Rule
 
 `AGENTS.md` defines the always-on doctrine for the repository.
@@ -45,6 +93,36 @@ Examples:
 - if a new lifecycle stage is added, update the lifecycle overview, the affected stage notes, and the operational-state checklist; update `AGENTS.md` only if the standing governance model changed
 - if a new primary system, permanent proving rule, or global completion rule is adopted, update `AGENTS.md` as part of the same change
 - if only a stage-specific expectation changed, keep that detail in the stage notes and checklists instead of bloating `AGENTS.md`
+
+## No Implicit Stage Advancement Rule
+
+Do not describe a lifecycle stage as complete, advanced, ready, or unlocked unless all of the following are true:
+
+- every required checklist item for that stage is actually complete
+- the required artifacts for those items actually exist
+- required logs and checklist updates for those items have been made
+- the required verification commands for the claimed proving layer have actually been run and passed
+
+Do not use phrases such as:
+
+- "this effectively completes the stage"
+- "the repo is now at the next stage"
+- "the next stage is now allowed"
+
+unless the governing artifacts have been updated honestly and the prior stage is actually complete on its own terms.
+
+Inference is not completion.
+Partial progress is not stage advancement.
+
+## No Bundled Lifecycle Advancement Rule
+
+Do not advance multiple lifecycle stages in one pass.
+
+Do not collapse genesis, architecture, product definition, setup, feature delivery, or later stages into a single broad effort such as "reconciliation," "bootstrapping," or "getting the repo into a real state."
+
+Each lifecycle stage must be satisfied in order, and each required checklist item within that stage must be completed discretely.
+
+Even if later-stage work seems obvious, do not begin it until the earlier stage is actually complete and the governing artifacts honestly say so.
 
 ## Lifecycle Maturity Ladder
 
@@ -125,6 +203,29 @@ Task plans must include:
 - canonical verification commands
 - intended proof layer
 
+## Minimal Edit Scope Rule
+
+For any checklist-driven task, edit only the files required to satisfy the current checklist item.
+
+Do not widen the edit scope to include anticipated future work, convenience refactors, adjacent cleanup, or downstream stage preparation unless the current checklist item explicitly requires it.
+
+If additional needed work is discovered, record it in the proper governing artifact and address it when it becomes the active next item.
+
+## No Reframing Rule
+
+Do not rename, broaden, or reinterpret the current work item into a larger effort category unless the repository artifacts explicitly define that broader category as the active work item.
+
+Examples of forbidden reframing include turning a specific checklist item into:
+
+- "lifecycle reconciliation"
+- "setup slice"
+- "product-definition completion pass"
+- "governance cleanup"
+- "feature bootstrap"
+
+The governing checklist item is the unit of execution.
+Use the repository's terms, not improvised umbrella descriptions.
+
 ## Development Operation Logging Rule
 
 All meaningful work must leave a durable development log under `notes/logs/`.
@@ -136,6 +237,26 @@ Development logs must record:
 - what commands and tests were run
 - what passed or failed
 - what remains blocked, deferred, or partial
+
+## Checklist And Commentary Separation Rule
+
+Commentary is not progress.
+
+Status updates must describe the exact governing checklist item currently being executed and the exact artifact being changed for that item.
+
+Do not use commentary to imply broader completion than the edit batch actually accomplished.
+
+Do not substitute summaries, plans, or explanations for required checklist completion, file updates, or verification.
+
+## User Correction Lock Rule
+
+If the user corrects how the repository instructions must be followed, that correction becomes binding for the rest of the turn unless it directly conflicts with a higher-priority repository rule.
+
+Do not reinterpret the correction into a looser version.
+
+Do not comply briefly and then return to a broader self-directed approach.
+
+When corrected, immediately align execution behavior to the user's stated control rule and keep that rule active until the user changes it.
 
 ## System Invariants Rule
 
@@ -220,6 +341,16 @@ Build, test, validation, migration, flow, audit, and performance commands must b
 Do not rediscover proving commands ad hoc during implementation.
 
 If a note or checklist claims something is verified, it must cite the documented canonical command that actually passed.
+
+## Per-Item Verification Rule
+
+When a checklist item has a relevant verification command, run only the verification needed to support completion of that item.
+
+Do not defer item-level verification until several later items have also been changed.
+
+Do not claim an item complete if its required verification for the claimed proving layer has not actually been run.
+
+If no verification is yet applicable for that item, state that explicitly in the governing artifact or commentary rather than implying proof exists.
 
 ## Test Progression Rule
 
@@ -344,6 +475,22 @@ A feature is complete only when all of the following are true:
 - known limitations are documented explicitly
 
 No feature is complete without full real E2E proof for its intended scope.
+
+## Turn-End Constraint
+
+If the user has told you to proceed, continue executing the governed sequence until one of the following is true:
+
+- the requested governed scope is actually complete
+- you are blocked by missing information that cannot be resolved from repo context
+- the repository rules require a user decision
+- the user explicitly interrupts, pauses, or redirects the work
+
+Do not end the turn merely because:
+
+- one checklist item was completed
+- you identified the next step
+- you want confirmation on an obvious next item
+- you have a partial progress summary to share
 
 ## Completion State Vocabulary
 
@@ -518,6 +665,27 @@ Every feature, flow, and checklist should explicitly consider:
 - recovery complexity
 - operator confusion risk
 - auditability risk
+
+## Required Execution Pattern For Lifecycle-Governed Work
+
+When performing lifecycle-governed work, follow this exact pattern repeatedly:
+
+1. Read the active stage from `plan/checklists/00_project_operational_state.md`.
+2. Identify the first incomplete item in the active governing checklist.
+3. Name that item explicitly in commentary.
+4. Edit only the artifact(s) required for that one item.
+5. Update only the minimal tracking surfaces required for that one item.
+6. Run only the verification required for that one item, if applicable.
+7. Report that item's result honestly.
+8. Immediately continue to the next first incomplete item unless blocked.
+
+Forbidden substitutions:
+
+- jumping ahead to a later item
+- batching multiple checklist items into one edit pass
+- announcing a future step instead of doing it
+- inferring stage completion from momentum
+- treating broad summaries as checklist completion
 - performance risk
 - cross-system contract risk
 

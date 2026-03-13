@@ -12,6 +12,7 @@ Name the repository's primary systems and their responsibilities.
 - Config or YAML: declarative structure and policy, not hidden runtime authority.
 - Prompts: first-class execution and review assets when AI behavior is part of the system.
 - Website UI: browser operator surface when the product includes one.
+- User documentation: user-facing and operator-facing guidance, reference material, and runbooks that must stay aligned with real behavior.
 
 ## Project-Specific Decisions To Fill In
 
@@ -20,6 +21,7 @@ Name the repository's primary systems and their responsibilities.
 - which systems are not applicable
 - chosen stack decisions for each active system
 - stack choices that remain undecided and must be resolved during genesis or architecture
+- which documentation audiences and published doc surfaces are authoritative
 
 Related note:
 

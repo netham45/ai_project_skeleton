@@ -1,3 +1,9 @@
+invariants:
+  - every product flow must name the product features it exercises
+  - every product feature must be covered by at least one relevant flow
+  - product-definition flows may govern decomposition work, but they do not replace runtime flows for user-requested capabilities
+  - no user-requested feature may remain traceable only to freeform concept prose
+
 flows:
   - flow_id: FLOW00
     name: define_architecture_boundaries
@@ -8,6 +14,8 @@ flows:
       - notes/lifecycle/02_stage_01_architecture.md
       - notes/specs/architecture/authority_and_api_model.md
       - notes/specs/architecture/code_vs_config_delineation.md
+    source_vision_refs: []
+    covers_feature_ids: []
     expected_systems:
       - database
       - cli
@@ -16,6 +24,8 @@ flows:
       - prompts
       - website_ui
       - notes
+    documentation_required: false
+    documentation_surfaces: []
     key_invariants:
       - runtime authority may not be implied by YAML or starter scaffolding
       - stack choices must be explicit or explicitly undecided
@@ -31,11 +41,18 @@ flows:
     governing_notes:
       - notes/lifecycle/04_stage_03_setup.md
       - notes/catalogs/checklists/verification_command_catalog.md
+    source_vision_refs: []
+    covers_feature_ids:
+      - F01
     expected_systems:
       - notes
       - plans
       - checklists
       - tests
+      - user_docs
+    documentation_required: true
+    documentation_surfaces:
+      - docs/README.md
     key_invariants:
       - setup must reflect already-defined product contracts rather than inventing them
       - bounded setup proof must not be described as real E2E completion
@@ -51,6 +68,9 @@ flows:
     governing_notes:
       - notes/lifecycle/03_stage_02_product_definition.md
       - notes/catalogs/traceability/spec_traceability_matrix.md
+    source_vision_refs: []
+    covers_feature_ids:
+      - F03
     expected_systems:
       - database
       - cli
@@ -58,9 +78,18 @@ flows:
       - config
       - prompts
       - website_ui
+      - user_docs
       - notes
+    documentation_required: true
+    documentation_surfaces:
+      - docs/README.md
+      - docs/user/README.md
+      - docs/operator/README.md
+      - docs/reference/README.md
+      - docs/runbooks/README.md
     key_invariants:
       - every major flow must name the affected systems explicitly
+      - every major flow must record whether documentation changes are required
       - every claimed flow must name a bounded proof surface and a real E2E target or an honest not-applicable reason
     acceptance_summary: Product definition is not complete until the major journeys are written down with their ownership and proof posture.
     bounded_proof:
@@ -75,6 +104,9 @@ flows:
       - notes/lifecycle/03_stage_02_product_definition.md
       - notes/specs/product/processing_system_contracts.md
       - notes/specs/product/operator_surface_map.md
+    source_vision_refs: []
+    covers_feature_ids:
+      - F03
     expected_systems:
       - database
       - cli
@@ -82,10 +114,19 @@ flows:
       - config
       - prompts
       - website_ui
+      - user_docs
       - notes
+    documentation_required: true
+    documentation_surfaces:
+      - docs/README.md
+      - docs/user/README.md
+      - docs/operator/README.md
+      - docs/reference/README.md
+      - docs/runbooks/README.md
     key_invariants:
       - contract notes must state inputs, outputs, failures, and proof surfaces rather than only naming features
       - domain vocabulary must be consistent across flow, feature, and traceability assets
+      - documentation surfaces must be named before setup claims implementation readiness
     acceptance_summary: Setup can begin only after the starter feature and processing contracts are explicit enough to scaffold against.
     bounded_proof:
       - python3 -m pytest tests/unit/test_lifecycle_docs.py -q
@@ -98,6 +139,9 @@ flows:
     governing_notes:
       - notes/catalogs/checklists/e2e_execution_policy.md
       - notes/lifecycle/06_stage_05_hardening_and_e2e.md
+    source_vision_refs: []
+    covers_feature_ids:
+      - F04
     expected_systems:
       - database
       - cli
@@ -105,9 +149,43 @@ flows:
       - config
       - prompts
       - website_ui
+      - user_docs
+    documentation_required: true
+    documentation_surfaces:
+      - flow-specific docs selected from `notes/specs/product/user_documentation_contract.md`
     key_invariants:
       - the live runtime must perform the workflow steps being claimed
       - synthetic progression may not be counted as E2E coverage
+      - documentation must not claim steps that the live runtime path does not support
     acceptance_summary: A named runtime narrative passes through its real system boundaries for the stated scope.
     bounded_proof: []
     e2e_target: tests/e2e/test_e2e_first_flow.py
+  - flow_id: FLOW10
+    name: example_user_requested_capability_flow
+    kind: user_or_operator
+    status: planned
+    summary: Example runtime flow showing how a decomposed user-requested feature should map into the flow inventory.
+    governing_notes:
+      - notes/lifecycle/03_stage_02_product_definition.md
+      - notes/specs/product/implementation_slicing_guide.md
+    source_vision_refs:
+      - notes/explorations/original_concept.md#capability-1
+    covers_feature_ids:
+      - PF01
+    expected_systems:
+      - cli
+      - daemon
+      - website_ui
+      - user_docs
+      - notes
+    documentation_required: true
+    documentation_surfaces:
+      - docs/user/example.md
+      - docs/operator/example.md
+    key_invariants:
+      - example rows are placeholders for real user-requested capabilities, not permanent substitutes
+      - every product flow should preserve the linkage from source vision to feature to proof
+    acceptance_summary: Replace this example flow with a real flow once the original project vision is known.
+    bounded_proof:
+      - python3 -m pytest tests/unit/test_product_feature_traceability_docs.py -q
+    e2e_target: tests/e2e/test_e2e_example_capability.py

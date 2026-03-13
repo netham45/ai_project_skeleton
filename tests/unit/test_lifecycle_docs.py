@@ -54,6 +54,7 @@ def test_product_definition_stage_note_references_required_artifacts() -> None:
         "notes/specs/product/implementation_slicing_guide.md",
         "notes/specs/product/operator_surface_map.md",
         "notes/specs/product/processing_system_contracts.md",
+        "notes/specs/product/user_documentation_contract.md",
     ]:
         assert required_ref in text
 
@@ -70,6 +71,7 @@ def test_operational_state_and_bootstrap_readiness_require_product_definition() 
     for substep in [
         "product_definition.define_major_user_flows",
         "product_definition.define_major_features",
+        "product_definition.decompose_original_vision_into_features",
         "product_definition.define_feature_contracts",
         "product_definition.define_processing_system_contracts",
         "product_definition.define_domain_model",
@@ -80,10 +82,13 @@ def test_operational_state_and_bootstrap_readiness_require_product_definition() 
         assert substep in operational_text
 
     for row in [
+        "Original vision decomposition",
         "Major user flow inventory",
         "Major feature inventory",
+        "Feature-to-flow mapping",
         "Product contract notes",
         "Domain model and vocabulary",
+        "User documentation contract",
         "Implementation slicing guide",
         "Traceability matrix",
     ]:
@@ -114,6 +119,7 @@ def test_product_definition_spec_family_exists() -> None:
         PRODUCT_SPECS_DIR / "implementation_slicing_guide.md",
         PRODUCT_SPECS_DIR / "operator_surface_map.md",
         PRODUCT_SPECS_DIR / "processing_system_contracts.md",
+        PRODUCT_SPECS_DIR / "user_documentation_contract.md",
     ]:
         assert path.exists(), f"Missing required product-definition note: {path.name}"
 
@@ -135,9 +141,20 @@ def test_flow_feature_traceability_assets_reference_product_definition() -> None
 
     assert "FLOW03" in flow_text
     assert "FLOW04" in flow_text
+    assert "documentation_required: true" in flow_text
     assert "notes/lifecycle/03_stage_02_product_definition.md" in flow_text
-    assert "F03 | Product definition contracts" in feature_text
+    assert "F03 | governance | Product definition contracts" in feature_text
     assert "G03 | Product definition is explicit before setup" in traceability_text
     assert "G05 | Product definition is implementation-ready" in traceability_text
+    assert "G08 | User-requested product features are explicitly decomposed and traceable" in traceability_text
     assert "product-definition pass before setup" in readme_text
     assert "## Product Definition Commands" in commands_text
+    assert "tests/unit/test_user_documentation_docs.py" in commands_text
+
+
+def test_product_definition_stage_requires_original_vision_decomposition() -> None:
+    text = (LIFECYCLE_DIR / "03_stage_02_product_definition.md").read_text(encoding="utf-8")
+
+    assert "## Original Vision Decomposition Rule" in text
+    assert "preserves the user-visible intent of each requested capability" in text
+    assert "no user-provided feature remains implicit in prose-only form" in text

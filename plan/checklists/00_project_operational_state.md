@@ -106,6 +106,15 @@ Use this checklist to:
 - Advance when:
   - the starter feature set has stable IDs, summaries, dependencies, and proof targets
 
+### `product_definition.decompose_original_vision_into_features`
+
+- Status: `planned`
+- Required artifacts:
+  - `notes/explorations/original_concept.md`
+  - `notes/catalogs/inventory/major_feature_inventory.md`
+- Advance when:
+  - every meaningful user-requested capability has a stable feature row, affected systems, and proof posture
+
 ### `product_definition.define_feature_contracts`
 
 - Status: `planned`
@@ -138,6 +147,15 @@ Use this checklist to:
   - `notes/specs/product/operator_surface_map.md`
 - Advance when:
   - the CLI and website UI surfaces are outlined for the intended scope, or marked not applicable explicitly
+
+### `product_definition.define_user_documentation_contracts`
+
+- Status: `planned`
+- Required artifacts:
+  - `notes/specs/product/user_documentation_contract.md`
+  - `docs/README.md`
+- Advance when:
+  - documentation audiences, ownership boundaries, and required starter documentation surfaces are explicit
 
 ### `product_definition.define_implementation_slices`
 

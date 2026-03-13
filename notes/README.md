@@ -11,6 +11,9 @@ Use this tree to:
 - capture stack decisions explicitly
 - track inventories, flow relevance, and traceability
 - record development work through required logs
-- keep documentation aligned with implementation and proof claims
+- keep governance artifacts aligned with implementation and proof claims
+
+Use `docs/` for user-facing and operator-facing documentation.
+Do not use `notes/` as a substitute for the real product documentation surface.
 
 The skeleton intentionally leaves project-specific stack and runtime details open. Those decisions should be written here during genesis and architecture by the real cloned project.

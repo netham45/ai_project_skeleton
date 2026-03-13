@@ -4,8 +4,8 @@
 
 This repository is being built as a spec-driven system.
 
-Work in this repo must stay aligned with the design notes and authoritative note assets in `notes/`.
-Implementation is not allowed to drift away from the notes silently.
+Work in this repo must stay aligned with the design notes, authoritative note assets in `notes/`, and authoritative user-documentation assets in `docs/` when those surfaces exist.
+Implementation is not allowed to drift away from those artifacts silently.
 
 If coding reveals a limitation, contradiction, missing behavior, needed elaboration, verification gap, runtime mismatch, command inconsistency, checklist mismatch, or lifecycle-stage mismatch, the relevant note, checklist, plan, or lifecycle artifact must be updated in the same change or in an immediately adjacent follow-up change.
 
@@ -43,6 +43,68 @@ When repository instructions, lifecycle artifacts, checklists, plans, or explici
 Do not substitute personal judgment, engineering preference, inferred efficiency, or "obvious next steps" for the declared instructions.
 
 If the agent believes a different order would be better, that belief is irrelevant unless the governing artifacts explicitly change.
+
+## Governance Is Not Delivery Rule
+
+When the user asks for a concrete product outcome such as a website, feature, fix, command, or review result, required governance work is only a prerequisite step.
+
+The agent must treat governance updates as enabling work, not as the requested outcome itself.
+
+If the required governance work can be completed within the same turn and no valid blocker exists, the agent must continue through setup, implementation, verification, and documentation for the requested product scope in that same turn.
+
+It is a failure to stop after updating notes, plans, checklists, lifecycle state, or logs when the user asked for executable product work and the next implementation step is known.
+
+## No Governance-Only Stop Rule
+
+The agent must not end a turn merely because:
+
+- lifecycle artifacts were repaired
+- a task plan was created or updated
+- a checklist item was completed
+- the repository was advanced to a new stage
+- prerequisite notes now exist
+
+Those are not valid stopping points when the user requested implementation and implementation can proceed.
+
+## Deliverable Priority Rule
+
+When user intent is concrete and implementation-facing, the primary success condition is delivering the requested artifact or behavior.
+
+Governance correctness is required, but governance work must be compressed to the minimum honest scope necessary to unblock delivery.
+
+The agent must optimize for reaching the requested deliverable, not for maximizing time spent on repository process.
+
+## Minimum Governance Necessary Rule
+
+When prerequisite governance artifacts are missing or stale, update only the smallest set of artifacts required to unlock the next real implementation step.
+
+Do not expand governance edits beyond what is necessary for the active user request unless a higher-priority repository rule explicitly requires it.
+
+## User-Requested Artifact Continuation Rule
+
+If the user explicitly requests a product artifact such as a website, page, route, feature, command, or testable workflow, the agent must continue until one of the following is true:
+
+- the artifact exists and is verified to the highest honest level currently possible
+- a concrete external blocker exists
+- the repository rules require a user decision that cannot be inferred safely
+
+A message that only reports prerequisite governance completion is not an acceptable final response for such a request.
+
+## Governance Batch Compression Rule
+
+If several sequential governance checklist items are purely prerequisite to the same requested implementation outcome, the agent should complete them as quickly as possible and immediately resume implementation work in the same turn.
+
+The agent must not treat each prerequisite governance item as its own user-visible milestone unless the user explicitly asked for stage-by-stage reporting.
+
+## Wrong-Stop Prevention Rule
+
+Before sending a final response, the agent must ask:
+
+"Did the user ask for a concrete deliverable that still does not exist?"
+
+If yes, the agent must continue working unless blocked by an allowed blocker.
+
+Passing notes, plans, checklist, or document tests does not answer that question.
 
 ## First Unchecked Item Rule
 
@@ -142,6 +204,33 @@ If inspection reveals the next required checklist item clearly, the agent must e
 
 Analysis is only a precursor to execution unless the user explicitly requested analysis only.
 
+## No Checkpoint Summary Stop Rule
+
+Do not end a turn with a progress summary, checkpoint summary, partial completion report, or "next steps" message if the governing checklist still has a known next item and no valid blocker exists.
+
+A summary is not a stopping condition.
+
+If the next checklist item is known, the agent must execute it in the same turn rather than stopping to describe progress.
+
+This applies even when:
+
+- substantial progress was already made
+- the next item belongs to a new lifecycle stage
+- the agent believes implementation should wait
+- the agent wants to confirm that the user still wants the requested outcome
+- the turn feels long
+
+## Final Response Gating Rule
+
+A final response is only allowed when one of the following is true:
+
+- the requested governed scope is actually complete
+- a valid blocker has been reached and stated concretely
+- the repository rules require a user decision
+- the user explicitly asked to stop, pause, or explain
+
+Otherwise, continue executing the governing checklist.
+
 ## Stop Guessing Rule
 
 This repository exists to eliminate guessing.
@@ -207,7 +296,7 @@ Use this shorthand to understand how repository expectations tighten over time:
 
 - `genesis`: define mission, systems, stack direction, unknowns, and bootstrap governance
 - `architecture`: define authority, durability, boundary lines, and stack ownership
-- `product definition`: define major flows, feature outlines, contracts, domain model, operator surfaces, and implementation slices
+- `product definition`: define major flows, feature outlines, contracts, domain model, operator surfaces, user-documentation surfaces, and implementation slices
 - `setup`: create the scaffold and bounded-proof surface for the defined starter scope
 - `feature delivery`: implement features against the defined contracts while keeping plans, logs, checklists, and notes aligned
 - `hardening and end-to-end proof`: prove the intended runtime narratives through real boundaries and revisit resilience, performance, and audit expectations
@@ -245,6 +334,21 @@ Prompts are first-class implementation assets when AI behavior is part of the pr
 
 The website UI is the browser operator surface when the product includes one.
 
+### 7. User Documentation
+
+User documentation is the user-facing and operator-facing guidance surface for setup, usage, commands, troubleshooting, and supported workflows.
+
+It includes:
+
+- user guides
+- operator guides that are part of normal product use
+- reference documentation
+- runbooks exposed as part of actual operation
+- published documentation routes or static documentation artifacts where applicable
+
+`notes/` are governance and design artifacts.
+`docs/` are consumer-facing documentation artifacts.
+
 If a starter project truly does not use one of these systems, mark that system explicitly as `not_applicable` in the governing plan, checklist, or review context.
 
 ## Stack Declaration Rule
@@ -276,8 +380,11 @@ Task plans must include:
 - the goal
 - the scope
 - affected systems
+- documentation impact
+- required documentation changes or an explicit no-change rationale
 - relevant notes
 - canonical verification commands
+- documentation verification commands
 - intended proof layer
 
 ## Minimal Edit Scope Rule
@@ -408,6 +515,7 @@ Checklists must explicitly record:
 
 - affected systems
 - implementation status
+- user documentation status
 - bounded test status
 - E2E status
 - notes status
@@ -458,6 +566,27 @@ They must be updated whenever work reveals:
 - a testing expectation change
 - a verification-command change
 - a checklist or lifecycle mismatch
+
+## Documentation Maintenance Rule
+
+The authoritative user-documentation assets in `docs/` are part of the implementation surface when the product includes user-facing or operator-facing documentation.
+
+They must be updated whenever work changes:
+
+- user-visible behavior
+- operator-visible behavior
+- setup or bootstrap steps
+- commands, flags, or examples presented to users
+- configuration or environment requirements presented to users
+- supported workflows
+- visible failure handling or troubleshooting guidance
+- recovery or runbook behavior that operators are expected to follow
+
+Task plans, feature checklists, and review context must record one of:
+
+- documentation changed
+- documentation reviewed with no change required, with rationale
+- documentation not applicable, with rationale
 
 ## Relevant Flow Rule
 
@@ -657,6 +786,7 @@ No feature is small enough to be excused from full real E2E proof.
 A feature is complete only when all of the following are true:
 
 - relevant notes are current
+- relevant user documentation is current, or marked not applicable explicitly
 - implementation matches the notes
 - invariants are explicit
 - affected systems are explicitly accounted for
@@ -949,18 +1079,20 @@ For every meaningful feature, consider explicitly:
 4. website UI changes
 5. config or YAML changes
 6. prompt changes
-7. note updates
-8. invariants
-9. affected systems
-10. canonical verification commands
-11. bounded tests
-12. E2E tests
-13. checklist updates
-14. development log updates
-15. document consistency tests
-16. performance impact
-17. observability and auditability impact
-18. recovery and concurrency impact
+7. user-documentation changes
+8. note updates
+9. invariants
+10. affected systems
+11. canonical verification commands
+12. documentation verification commands
+13. bounded tests
+14. E2E tests
+15. checklist updates
+16. development log updates
+17. document consistency tests
+18. performance impact
+19. observability and auditability impact
+20. recovery and concurrency impact
 
 If one of these is not affected, that should be a deliberate conclusion rather than an assumption.
 

@@ -12,3 +12,4 @@ At minimum, this family should describe:
 - implementation slicing and delivery order
 - processing-system contracts
 - operator surfaces across CLI and website UI where applicable
+- user-documentation contracts and documentation ownership boundaries

@@ -44,6 +44,13 @@ Use this template to define a feature before setup or implementation work begins
 - Config or YAML:
 - Prompts:
 - Website UI:
+- User documentation:
+
+### Documentation Impact
+
+- Documentation status: required_update | reviewed_no_change | not_applicable
+- Documentation surfaces:
+- Documentation rationale:
 
 ### Runtime And Processing Behavior
 
@@ -64,6 +71,7 @@ Use this template to define a feature before setup or implementation work begins
 
 ### Proof Surface
 
+- Documentation verification:
 - Bounded proof:
 - Real E2E target:
 

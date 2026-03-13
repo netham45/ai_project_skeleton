@@ -14,6 +14,8 @@ Define the structural rules authoritative document families are expected to foll
 - lifecycle stage sequences should agree with operational-state and README guidance
 - flow inventory, feature inventory, and traceability notes should agree on the product-definition stage
 - product-definition spec notes should exist when the lifecycle claims that stage is required
+- task plans should record documentation impact explicitly
+- user-documentation contract and starter `docs/` surfaces should exist when the skeleton claims user documentation is first-class
 
 ## Anti-Goals
 

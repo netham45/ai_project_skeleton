@@ -14,4 +14,5 @@ Explain how and when authoritative document-family tests must run.
 
 ```bash
 python3 -m pytest tests/unit/test_lifecycle_docs.py -q
+python3 -m pytest tests/unit/test_user_documentation_docs.py -q
 ```

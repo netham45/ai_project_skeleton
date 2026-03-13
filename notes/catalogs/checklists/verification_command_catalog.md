@@ -20,6 +20,25 @@ Use these when product-definition notes, inventories, or lifecycle assets change
 
 ```bash
 python3 -m pytest tests/unit/test_lifecycle_docs.py -q
+python3 -m pytest tests/unit/test_user_documentation_docs.py -q
+```
+
+## Documentation Consistency Commands
+
+Use these when `docs/`, documentation contracts, task-plan documentation fields, or documentation traceability assets change:
+
+```bash
+python3 -m pytest tests/unit/test_user_documentation_docs.py -q
+```
+
+## Product Feature Traceability Commands
+
+Use these when original-concept notes, product-feature inventory rows, flow mappings, or feature checklists change:
+
+```bash
+python3 -m pytest tests/unit/test_lifecycle_docs.py -q
+python3 -m pytest tests/unit/test_user_documentation_docs.py -q
+python3 -m pytest tests/unit/test_product_feature_traceability_docs.py -q
 ```
 
 ## Integration Command Placeholder

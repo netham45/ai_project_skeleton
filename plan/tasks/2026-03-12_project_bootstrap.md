@@ -12,8 +12,19 @@ Create the first governed repository scaffold with lifecycle notes, starter inve
 - Website UI: define whether a browser surface exists now, later, or never.
 - Config or YAML: define what belongs in declarative assets versus code.
 - Prompts: define prompt asset expectations if AI participation is part of the system.
+- User documentation: define whether a real `docs/` surface exists now, later, or never, and record the initial ownership boundary with `notes/`.
 - Notes: create and align the initial architecture, lifecycle, inventory, and checklist surfaces.
 - Tests: establish at least one bounded verification command and one document-consistency command.
+
+## Documentation Impact
+
+- Status: required_update
+- Required documentation changes: establish `docs/README.md` and the starter documentation-family placeholders when user documentation becomes first-class
+- Rationale: bootstrap defines the repository shape and must name the consumer-facing documentation surface explicitly
+
+## Documentation Verification
+
+- `python3 -m pytest tests/unit/test_user_documentation_docs.py -q`
 
 ## Canonical Verification
 

@@ -35,6 +35,7 @@ Describe the processing and coordination systems that the starter product needs 
 - which failures pause work
 - which failures are terminal
 - how interrupted work becomes inspectable and resumable
+- which recovery behavior must be reflected in user or operator runbooks
 
 ## Rule
 

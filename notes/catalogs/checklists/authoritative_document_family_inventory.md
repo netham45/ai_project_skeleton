@@ -16,6 +16,7 @@ Identify which document families are treated as authoritative implementation ass
 | verification command catalog | defines canonical proving commands | doc-consistency checks |
 | flow inventory | tracks relevant flows and E2E mapping | mapping and schema checks |
 | product-definition specs | define feature contracts, domain terms, processing contracts, and operator surfaces before setup | lifecycle and note-family checks |
+| user documentation docs | define user-facing guidance, operator guidance, references, and runbooks that must track real behavior | doc-structure and alignment checks |
 
 ## Rule
 

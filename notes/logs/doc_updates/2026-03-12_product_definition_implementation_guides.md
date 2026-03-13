@@ -32,6 +32,6 @@
   - `plan/checklists/00_project_operational_state.md`
   - `plan/tasks/2026-03-12_product_definition_implementation_guides.md`
 - Commands and tests run:
-  - `python3 -m pytest ai_project_skeleton/tests/unit/test_lifecycle_docs.py -q`
+  - `python3 -m pytest tests/unit/test_lifecycle_docs.py -q`
 - Result: Passed. Product definition now ends with implementation-ready feature slicing guidance rather than only high-level contracts.
 - Next step: If later setup work starts consuming these artifacts directly, add a second bounded test that verifies the setup surfaces continue to reference the slicing guide and delivery map correctly.

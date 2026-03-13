@@ -13,5 +13,5 @@ Explain how and when authoritative document-family tests must run.
 ## Starter Command Placeholder
 
 ```bash
-python3 -m pytest ai_project_skeleton/tests/unit/test_lifecycle_docs.py -q
+python3 -m pytest tests/unit/test_lifecycle_docs.py -q
 ```

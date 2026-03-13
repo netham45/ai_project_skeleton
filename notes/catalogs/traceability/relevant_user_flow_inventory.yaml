@@ -41,7 +41,7 @@ flows:
       - bounded setup proof must not be described as real E2E completion
     acceptance_summary: The starter repo has a real scaffold, a real bounded command, and honest documentation about missing stronger proof.
     bounded_proof:
-      - python3 -m pytest ai_project_skeleton/tests/unit/test_lifecycle_docs.py -q
+      - python3 -m pytest tests/unit/test_lifecycle_docs.py -q
     e2e_target: planned
   - flow_id: FLOW03
     name: define_major_user_and_operator_flows
@@ -64,7 +64,7 @@ flows:
       - every claimed flow must name a bounded proof surface and a real E2E target or an honest not-applicable reason
     acceptance_summary: Product definition is not complete until the major journeys are written down with their ownership and proof posture.
     bounded_proof:
-      - python3 -m pytest ai_project_skeleton/tests/unit/test_lifecycle_docs.py -q
+      - python3 -m pytest tests/unit/test_lifecycle_docs.py -q
     e2e_target: tests/e2e/test_e2e_first_flow.py
   - flow_id: FLOW04
     name: define_feature_and_processing_contracts
@@ -88,7 +88,7 @@ flows:
       - domain vocabulary must be consistent across flow, feature, and traceability assets
     acceptance_summary: Setup can begin only after the starter feature and processing contracts are explicit enough to scaffold against.
     bounded_proof:
-      - python3 -m pytest ai_project_skeleton/tests/unit/test_lifecycle_docs.py -q
+      - python3 -m pytest tests/unit/test_lifecycle_docs.py -q
     e2e_target: planned
   - flow_id: FLOW02
     name: run_first_real_user_or_operator_narrative

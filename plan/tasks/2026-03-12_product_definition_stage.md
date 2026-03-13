@@ -17,7 +17,7 @@ Insert a product-definition lifecycle stage between architecture and setup so th
 
 ## Canonical Verification
 
-- `python3 -m pytest ai_project_skeleton/tests/unit/test_lifecycle_docs.py -q`
+- `python3 -m pytest tests/unit/test_lifecycle_docs.py -q`
 
 ## Exit Criteria
 

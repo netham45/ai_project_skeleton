@@ -103,7 +103,7 @@ def test_product_definition_spec_family_exists() -> None:
 
     assert "product-definition specs" in inventory_text
     assert "product-definition spec notes should exist" in rulebook_text
-    assert "ai_project_skeleton/tests/unit/test_lifecycle_docs.py" in policy_text
+    assert "tests/unit/test_lifecycle_docs.py" in policy_text
 
     for path in [
         PRODUCT_SPECS_DIR / "README.md",

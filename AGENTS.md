@@ -36,6 +36,14 @@ That re-read must include:
 
 Do not rely on pre-compact memory, earlier commentary summaries, or inferred momentum to continue lifecycle-governed work after compaction.
 
+## Instruction Obedience Rule
+
+When repository instructions, lifecycle artifacts, checklists, plans, or explicit user corrections define what to do next, the agent must obey them literally.
+
+Do not substitute personal judgment, engineering preference, inferred efficiency, or "obvious next steps" for the declared instructions.
+
+If the agent believes a different order would be better, that belief is irrelevant unless the governing artifacts explicitly change.
+
 ## First Unchecked Item Rule
 
 For lifecycle-governed work, always begin by identifying:
@@ -51,6 +59,37 @@ Do not infer a better ordering from chat context if the governing checklist alre
 
 If the first incomplete item is ambiguous, resolve that ambiguity from the repository artifacts before editing anything else.
 
+## Sole Checklist Authority Rule
+
+When a lifecycle stage, readiness checklist, feature checklist, setup checklist, or other governing checklist applies to the current work, that checklist is the sole authority for execution order.
+
+Do not derive execution order from:
+
+- user-request phrasing
+- inferred task intent
+- engineering convenience
+- momentum from earlier work
+- review findings
+- summaries or commentary
+- broad lifecycle understanding
+- the agent's preferred implementation sequence
+
+If a governing checklist exists, the agent must execute the checklist in its recorded order and must not substitute any other sequencing logic.
+
+## Established Authority Rule
+
+The repository's established authority model must not be overridden.
+
+Authority order is:
+
+1. direct user correction for the current task
+2. repository lifecycle artifacts and governing checklists
+3. governing task plans and setup plans
+4. other repository notes and inventories
+5. agent judgment
+
+Agent judgment is last-priority and may only operate where higher-priority authority is silent.
+
 ## Single Checklist Item Execution Rule
 
 When work is being driven by a lifecycle checklist, stage checklist, readiness checklist, or other governing checklist, complete exactly one checklist item per edit batch.
@@ -63,6 +102,21 @@ Do not update downstream artifacts "while you are there" unless the current chec
 
 If one checklist item reveals another missing prerequisite, finish and record the current item honestly, then move to the newly determined next item in a separate edit batch.
 
+## No Self-Authorization Rule
+
+The agent may not authorize itself to begin later work.
+
+The agent must not treat any of the following as permission to proceed early:
+
+- technical confidence
+- apparent simplicity
+- existing familiarity with the stack
+- partial completion of prerequisites
+- the belief that governance can be repaired afterward
+- the belief that a step is only "preparation"
+
+If a prerequisite step is not complete, later work is forbidden.
+
 ## Autonomous Continuation Rule
 
 "One checklist item at a time" does not mean "stop after one checklist item."
@@ -72,6 +126,29 @@ Unless blocked by missing information, a hard repository constraint, or an expli
 Do not end the turn merely to announce the next step.
 
 Do not wait for user confirmation between sequential checklist items unless the user explicitly asked for that stop-and-wait behavior.
+
+## No Analysis-Only Stop Rule
+
+Review, analysis, repository inspection, findings, and recommendations are not stopping points when the next governing checklist item is already known and no valid blocker exists.
+
+If inspection reveals the next required checklist item clearly, the agent must execute that item rather than stopping with:
+
+- a review summary
+- findings
+- a recommended sequence
+- "if you want, I can continue"
+- "the next step is"
+- "what needs to be done"
+
+Analysis is only a precursor to execution unless the user explicitly requested analysis only.
+
+## Stop Guessing Rule
+
+This repository exists to eliminate guessing.
+
+If a checklist, plan, lifecycle artifact, or user correction already determines the next step, the agent must not infer intent beyond that instruction.
+
+The presence of explicit process means guessing is prohibited, not helpful.
 
 ## Lifecycle Progression Rule
 
@@ -211,6 +288,14 @@ Do not widen the edit scope to include anticipated future work, convenience refa
 
 If additional needed work is discovered, record it in the proper governing artifact and address it when it becomes the active next item.
 
+## Required Self-Check Before Downstream Work
+
+Before any setup work, implementation work, dependency installation, schema inspection for implementation, test harness creation, or code generation, the agent must confirm all prerequisite governing artifacts for that exact step are already complete.
+
+If they are not complete, the agent must not proceed.
+
+The agent must treat this check as mandatory, not discretionary.
+
 ## No Reframing Rule
 
 Do not rename, broaden, or reinterpret the current work item into a larger effort category unless the repository artifacts explicitly define that broader category as the active work item.
@@ -225,6 +310,14 @@ Examples of forbidden reframing include turning a specific checklist item into:
 
 The governing checklist item is the unit of execution.
 Use the repository's terms, not improvised umbrella descriptions.
+
+## No Competing Plan Rule
+
+The agent must not create a parallel execution plan when the repository already provides one through lifecycle notes, checklists, setup plans, feature plans, or explicit user instruction.
+
+Do not "translate" the repository plan into a broader agent-managed plan.
+Do not replace checklist order with a personally preferred implementation sequence.
+Do not introduce a second control system on top of the repository's control system.
 
 ## Development Operation Logging Rule
 
@@ -248,6 +341,23 @@ Do not use commentary to imply broader completion than the edit batch actually a
 
 Do not substitute summaries, plans, or explanations for required checklist completion, file updates, or verification.
 
+## Deviations Are Failures Rule
+
+Any unauthorized reordering, bundling, skipping, early preparation, retroactive governance repair, or premature implementation is a failure, not an optimization.
+
+Do not describe such deviations as efficiency, momentum, cleanup, reconciliation, or harmless progress.
+
+If a deviation occurs, record it honestly as a process failure.
+
+## No Alternate Authority Rule
+
+Do not treat plans, logs, architectural judgment, implementation convenience, or newly discovered downstream work as authority equal to or stronger than the active governing checklist.
+
+Plans may describe work.
+Notes may constrain work.
+Logs may record work.
+But the active governing checklist controls what happens next.
+
 ## User Correction Lock Rule
 
 If the user corrects how the repository instructions must be followed, that correction becomes binding for the rest of the turn unless it directly conflicts with a higher-priority repository rule.
@@ -257,6 +367,30 @@ Do not reinterpret the correction into a looser version.
 Do not comply briefly and then return to a broader self-directed approach.
 
 When corrected, immediately align execution behavior to the user's stated control rule and keep that rule active until the user changes it.
+
+## No Retroactive Governance Repair Rule
+
+Do not perform downstream work first and then create or update the missing plans, notes, checklists, logs, or lifecycle state afterward.
+
+Retroactive governance repair does not make the earlier out-of-order work valid.
+
+If a required governing artifact is missing, create or complete that artifact before touching downstream implementation, setup, testing, or runtime surfaces.
+
+## No Preparation Loophole Rule
+
+Work that belongs to a later step remains later-step work even if described as preparation.
+
+The following count as downstream work when their prerequisite step is not complete:
+
+- reading runtime data needed only for later implementation
+- scaffolding code
+- installing dependencies
+- generating project structure
+- inspecting live schemas for implementation planning
+- creating tests for later-stage behavior
+- starting servers or build pipelines for later-stage work
+
+Do not relabel downstream work as preparation in order to begin it early.
 
 ## System Invariants Rule
 
@@ -453,6 +587,67 @@ If a file under `tests/e2e/` is only a bring-up target, partially simulated narr
 
 Simulation and E2E are opposites in this repository. A simulated workflow may still be useful at a lower layer, but it is never a substitute for the required real E2E proof and it does not reduce the obligation to implement that proof.
 
+## No E2E Deferral Rule
+
+If the requested work reaches a point where real E2E proof is required by the repository rules for honest completion of the claimed scope, the agent must continue through E2E implementation and execution in the same workstream.
+
+Do not stop at bounded tests, integration tests, scaffolding, or named future E2E targets if the requested scope is not honestly complete without real E2E proof.
+
+Do not treat E2E work as optional follow-up merely because it is larger, slower, more complex, or requires additional harness work.
+
+The correct response to missing E2E coverage is to build the required E2E coverage, not to downgrade the completion claim and stop.
+
+## E2E Blocker Standard
+
+E2E may be deferred only when a real blocker exists that cannot be resolved within the repository and current environment.
+
+Valid blockers are limited to things such as:
+
+- unavailable required external credentials
+- unavailable required external services
+- unavailable required browser or runtime capability
+- missing user-owned secrets or infrastructure that the agent cannot create
+- a repository defect that makes the E2E path impossible and must itself be fixed first
+
+The following are not valid blockers:
+
+- the E2E harness does not exist yet
+- the E2E work is large
+- the E2E requires additional implementation
+- bounded tests already pass
+- the feature can be called partial instead
+- the agent believes E2E should be done later
+
+## E2E Closure Rule
+
+When a feature requires real E2E proof, the agent must attempt the following sequence before stopping:
+
+1. define the exact E2E target from the feature and flow artifacts
+2. implement the missing E2E harness or test path
+3. run the E2E command
+4. fix failures found by that E2E path
+5. rerun until the E2E result is honest and stable, or until a valid blocker is reached
+
+Do not stop after merely naming the E2E target.
+Do not stop after writing an E2E plan.
+Do not stop after bounded proof if the requested scope still lacks required E2E proof.
+
+## No Complexity-Based Deferral Rule
+
+Test difficulty is not a reason to defer required proof.
+
+If required E2E coverage is difficult to implement, that difficulty is part of the task. The agent must keep working the problem by improving the harness, setup, contracts, or implementation until the E2E path exists or a valid external blocker is reached.
+
+Complexity, effort, expected duration, or harness absence are not acceptable reasons to stop.
+
+## Honest Stop Rule For Missing E2E
+
+If E2E is missing and no valid external blocker exists, the task is not at a stopping point.
+
+The agent must continue working rather than ending with a summary that says E2E is still pending, deferred, future work, or not yet implemented.
+
+A response that ends with "E2E remains to be added" is only acceptable when the user explicitly requested a bounded-only slice or when a valid blocker has been stated concretely.
+
 ## Completion Standard
 
 No feature or change is complete without tests.
@@ -491,6 +686,19 @@ Do not end the turn merely because:
 - you identified the next step
 - you want confirmation on an obvious next item
 - you have a partial progress summary to share
+
+## Checklist Exhaustion Rule
+
+If a governing checklist applies, the agent must continue until one of the following is true:
+
+- all items in the requested governed scope are complete
+- a valid blocker is reached and stated concretely
+- the user explicitly interrupts, pauses, or redirects the work
+
+The existence of a natural summary point is not a stopping condition.
+A completed review is not a stopping condition.
+A partial implementation is not a stopping condition.
+A downgraded status such as `partial` or `implemented` is not a stopping condition if required checklist work still remains and no valid blocker exists.
 
 ## Completion State Vocabulary
 
@@ -665,6 +873,14 @@ Every feature, flow, and checklist should explicitly consider:
 - recovery complexity
 - operator confusion risk
 - auditability risk
+
+## Context Grounding Rule
+
+All actions and proposals must remain grounded in the repository's stated purpose and current governed scope.
+
+Do not propose external control systems, alternate orchestration layers, or repo-purpose-changing solutions unless the user explicitly requests that category of change.
+
+If a proposal would change the product, authority model, or repo purpose rather than execute the current governed work, do not propose it.
 
 ## Required Execution Pattern For Lifecycle-Governed Work
 

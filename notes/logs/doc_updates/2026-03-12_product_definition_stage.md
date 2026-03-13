@@ -32,6 +32,6 @@
   - `plan/checklists/00_project_operational_state.md`
   - `plan/tasks/2026-03-12_product_definition_stage.md`
 - Commands and tests run:
-  - `python3 -m pytest ai_project_skeleton/tests/unit/test_lifecycle_docs.py -q`
+  - `python3 -m pytest tests/unit/test_lifecycle_docs.py -q`
 - Result: Passed. The skeleton now requires product-definition artifacts before setup and has a bounded document test covering the new lifecycle stage and note family.
 - Next step: If the skeleton evolves further, add more product-specific contract templates or an integration-level document test once setup begins to consume these artifacts directly.

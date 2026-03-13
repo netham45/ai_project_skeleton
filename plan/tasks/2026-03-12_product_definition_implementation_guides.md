@@ -17,7 +17,7 @@ Strengthen the product-definition stage so it ends with implementation-ready sli
 
 ## Canonical Verification
 
-- `python3 -m pytest ai_project_skeleton/tests/unit/test_lifecycle_docs.py -q`
+- `python3 -m pytest tests/unit/test_lifecycle_docs.py -q`
 
 ## Exit Criteria
 

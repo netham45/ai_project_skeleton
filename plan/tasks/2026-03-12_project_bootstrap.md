@@ -26,6 +26,24 @@ Create the first governed repository scaffold with lifecycle notes, starter inve
 
 - `python3 -m pytest tests/unit/test_user_documentation_docs.py -q`
 
+## Notes Impact
+
+- Status: required_update
+- Required notes changes: lifecycle notes, architecture starter notes, inventories, checklists, and verification-command catalog
+- Rationale: bootstrap establishes the governed repository surfaces themselves
+
+## Checklist Impact
+
+- Status: required_update
+- Required checklist changes: `plan/checklists/00_project_operational_state.md` and `plan/checklists/00_project_bootstrap_readiness.md`
+- Rationale: bootstrap creates the initial maturity and readiness surfaces
+
+## Test Impact
+
+- Status: required_update
+- Required test changes: starter bounded lifecycle and document-consistency tests
+- Rationale: bootstrap is not governed honestly unless the starter document families already have proof commands
+
 ## Canonical Verification
 
 - `python3 -m pytest tests/unit/test_bootstrap_docs.py -q`

@@ -32,6 +32,24 @@ Make user documentation a first-class governed system in the skeleton so plans, 
 
 - `python3 -m pytest tests/unit/test_user_documentation_docs.py -q`
 
+## Notes Impact
+
+- Status: required_update
+- Required notes changes: user-documentation contract, lifecycle notes, inventories, traceability assets, checklist standards, and README guidance
+- Rationale: the task promotes documentation into a first-class governed system
+
+## Checklist Impact
+
+- Status: required_update
+- Required checklist changes: feature checklist standard and bootstrap/operational-state checklists where user documentation becomes explicit
+- Rationale: checklists must account for documentation as a tracked system rather than an implicit afterthought
+
+## Test Impact
+
+- Status: required_update
+- Required test changes: bounded documentation-governance and document-family consistency tests
+- Rationale: the documentation system should have immediate proving coverage when it becomes authoritative
+
 ## Canonical Verification
 
 - `python3 -m pytest tests/unit/test_lifecycle_docs.py -q`

@@ -26,6 +26,24 @@ Insert a product-definition lifecycle stage between architecture and setup so th
 
 - `python3 -m pytest tests/unit/test_user_documentation_docs.py -q`
 
+## Notes Impact
+
+- Status: required_update
+- Required notes changes: lifecycle notes, product-definition spec notes, feature inventory, flow inventory, traceability matrix, and verification-command catalog
+- Rationale: this task inserts a new lifecycle stage and its authoritative note family
+
+## Checklist Impact
+
+- Status: required_update
+- Required checklist changes: `plan/checklists/00_project_operational_state.md` and `plan/checklists/00_project_bootstrap_readiness.md`
+- Rationale: product definition becomes a real readiness gate before setup
+
+## Test Impact
+
+- Status: required_update
+- Required test changes: bounded lifecycle and traceability document tests for the new stage
+- Rationale: the new stage is authoritative only if the document-family tests enforce it
+
 ## Canonical Verification
 
 - `python3 -m pytest tests/unit/test_lifecycle_docs.py -q`

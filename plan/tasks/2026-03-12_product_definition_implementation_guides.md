@@ -26,6 +26,24 @@ Strengthen the product-definition stage so it ends with implementation-ready sli
 
 - `python3 -m pytest tests/unit/test_user_documentation_docs.py -q`
 
+## Notes Impact
+
+- Status: required_update
+- Required notes changes: implementation slicing guide, feature delivery map, lifecycle note, inventories, and verification-command catalog
+- Rationale: implementation readiness and delivery slicing are authoritative note assets
+
+## Checklist Impact
+
+- Status: required_update
+- Required checklist changes: `plan/checklists/00_project_operational_state.md` and `plan/checklists/00_project_bootstrap_readiness.md`
+- Rationale: the setup gate should reflect that implementation slicing is part of product-definition readiness
+
+## Test Impact
+
+- Status: required_update
+- Required test changes: bounded lifecycle and documentation-governance tests covering the stronger product-definition schema
+- Rationale: implementation-guide requirements should be enforced, not just described
+
 ## Canonical Verification
 
 - `python3 -m pytest tests/unit/test_lifecycle_docs.py -q`

@@ -29,3 +29,10 @@ Each product feature should appear here with:
 ## Rule
 
 If delivery order changes materially, update this note, the feature inventory, and the governing task plans together.
+
+Feature delivery should also keep the maintenance loop explicit during implementation:
+
+- update notes when implementation reveals new constraints or invariants
+- update docs when supported behavior, commands, setup steps, or operator expectations change
+- update checklists when status or proof posture changes
+- update bounded-test and E2E expectations when proving changes

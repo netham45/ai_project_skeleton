@@ -11,11 +11,18 @@ Replace this file with a real feature checklist when the original project vision
 - Feature ID: `PF01`
 - Source vision reference: `notes/explorations/original_concept.md#capability-1`
 - Governing flow IDs: `FLOW10`
+- Rigid feature definition file: `plan/features/PF01_example_capability.yaml`
+- Feature snapshot baseline: `notes/catalogs/verification/PF01_snapshot.json`
 - Documentation surfaces:
   - `docs/user/example.md`
   - `docs/operator/example.md`
 - Bounded proof command: `python3 -m pytest tests/unit/test_product_feature_traceability_docs.py -q`
+- E2E asset: `tests/e2e/test_e2e_example_capability.py`
 - Real E2E command: `python3 -m pytest tests/e2e/test_e2e_example_capability.py -q`
+- Last snapshot update command: `python3 scripts/update_feature_snapshot.py --feature PF01`
+- Last snapshot result: `not_run`
+- Last E2E command run: `not_run`
+- Last E2E result: `not_run`
 
 ## Status
 
@@ -31,6 +38,7 @@ Replace this file with a real feature checklist when the original project vision
 | Notes | planned | Replace with the real affected-system posture once the product feature is known. |
 | Bounded tests | planned | Replace with the real bounded proof once the product feature is known. |
 | E2E | planned | Replace with the real E2E proof once the product feature is known. |
+| Snapshot | planned | Replace with the real snapshot posture once the product feature is known. |
 | Overall | planned | Placeholder checklist only. |
 
 ## Known Limitations

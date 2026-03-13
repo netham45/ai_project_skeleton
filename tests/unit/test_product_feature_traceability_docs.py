@@ -24,11 +24,14 @@ def test_major_feature_inventory_defines_product_feature_traceability_fields() -
 
     assert "Feature kind" in text
     assert "Source vision reference" in text
+    assert "Feature definition" in text
     assert "Checklist" in text
     assert "Bounded proof" in text
     assert "Real E2E target" in text
     assert "Every product-feature row must include:" in text
     assert "PF01 | product_example | Example user-requested capability" in text
+    assert "plan/features/PF01_example_capability.yaml" in text
+    assert "checklist file reference once feature checklists exist" in text
 
 
 def test_flow_inventory_requires_feature_coverage_fields() -> None:
@@ -49,7 +52,12 @@ def test_feature_checklist_standard_requires_user_request_traceability() -> None
     )
 
     assert "## Required Traceability Fields" in text
+    assert "## Checklist-Per-Feature Rule" in text
+    assert "## Consistency Rules" in text
     assert "source vision reference" in text
     assert "governing flow IDs" in text
+    assert "rigid feature definition file" in text
     assert "real E2E command or explicit not-applicable reason" in text
+    assert "E2E asset" in text
+    assert "last E2E command run" in text
     assert "The checklist must preserve the linkage from user request to feature to flow to proof." in text

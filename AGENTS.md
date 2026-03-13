@@ -387,6 +387,48 @@ Task plans must include:
 - documentation verification commands
 - intended proof layer
 
+## Verification Command Authority Rule
+
+Do not guess which tests to run.
+
+Use `notes/catalogs/checklists/verification_command_catalog.md` as the default authority for which verification commands apply to the files, document families, or proof surfaces you changed.
+
+If multiple command groups apply, run all of the relevant groups for the changed scope.
+
+If the command catalog is updated in the same change, run the commands that the updated catalog says are required for that changed scope before claiming the change is verified.
+
+## Item-Level Verification Rule
+
+When a checklist item, task-plan exit criterion, or document-family rule has a relevant verification command, run that verification before claiming the item is complete.
+
+Do not postpone the required verification for the current item until several later edits have accumulated.
+
+Passing earlier or adjacent tests does not cover the current item unless the command catalog or governing task explicitly says it does.
+
+If no verification is yet applicable for the current item, say so explicitly in the governing artifact or log instead of implying proof exists.
+
+## Test Timing Rule
+
+Run the relevant tests at these points:
+
+1. after changing an authoritative document family, run the relevant document-consistency tests
+2. after changing a feature, flow, or contract, run the bounded tests required for that changed scope
+3. before refreshing a snapshot baseline or similar maintained proof artifact, run the verification that guards that artifact
+4. before claiming `verified`, `flow_complete`, or stronger status, run the commands for that claimed proving layer
+
+Do not send a final completion message for a governed change until the applicable verification for the claimed layer has actually passed, or until you have stated the concrete blocker that prevented it.
+
+## Full-Layer Verification Rule
+
+Running one narrow test does not authorize stronger claims automatically.
+
+- For doc-only changes, run the relevant document-consistency tests.
+- For bounded implementation changes, run the bounded tests required by the governing plan and command catalog.
+- For integration-scope changes, run the relevant integration tests before claiming that boundary is verified.
+- For E2E or `flow_complete` claims, run the real E2E command for the declared scope.
+
+If a change affects several layers, run the tests for all affected layers rather than only the fastest one.
+
 ## Minimal Edit Scope Rule
 
 For any checklist-driven task, edit only the files required to satisfy the current checklist item.

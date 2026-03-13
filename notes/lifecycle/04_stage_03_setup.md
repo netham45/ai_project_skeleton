@@ -13,6 +13,19 @@ Setup creates the first runnable repository skeleton and bounded-proof surface f
 - at least one future real E2E target is named
 - the scaffold reflects the defined major flows, feature outlines, and contract notes instead of inventing them ad hoc
 
+## Entry Gate
+
+Setup should not begin merely because a repository has one concept note and one broad task file.
+
+Setup entry requires product-definition evidence that is proportionate to the product's apparent complexity. Milestone-gate tests should consider:
+
+- whether real product features have been decomposed explicitly
+- whether those features are mapped to flows and proof targets
+- whether the product-definition task surface is specific enough for the number of meaningful capabilities in scope
+- whether documentation and operator surfaces have been identified before scaffolding hardens implementation choices
+
+Thin but technically valid product-definition work may warn. Missing prerequisite evidence should fail setup entry outright.
+
 ## Required Artifacts
 
 - `plan/tasks/2026-03-12_project_bootstrap.md`

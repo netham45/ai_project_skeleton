@@ -1,0 +1,50 @@
+feature_id: PF01
+name: Example user-requested capability
+feature_kind: product_example
+status: planned
+traceability:
+  source_vision_refs:
+    - notes/explorations/original_concept.md#capability-1
+  governing_flow_ids:
+    - FLOW10
+governed_files:
+  documentation:
+    required_update:
+      - docs/user/example.md
+      - docs/operator/example.md
+    reviewed_no_change:
+      - docs/reference/README.md
+  notes:
+    required_update:
+      - notes/specs/product/feature_contract_template.md
+      - notes/catalogs/inventory/major_feature_inventory.md
+  checklists:
+    required_update:
+      - plan/checklists/PF01_example_capability.md
+  logs:
+    required_update:
+      - notes/logs/features/README.md
+  tests:
+    bounded:
+      - tests/unit/test_product_feature_traceability_docs.py
+    integration: []
+    e2e_assets:
+      - tests/e2e/test_e2e_example_capability.py
+proof:
+  documentation_verification:
+    - python3 -m pytest tests/unit/test_product_feature_traceability_docs.py -q
+  bounded_tests:
+    - python3 -m pytest tests/unit/test_product_feature_traceability_docs.py -q
+  required_e2e_command: python3 -m pytest tests/e2e/test_e2e_example_capability.py -q
+  e2e_asset: tests/e2e/test_e2e_example_capability.py
+  e2e_status: planned
+  last_e2e_run: not_run
+  last_e2e_result: not_run
+key_files:
+  - docs/user/example.md
+  - docs/operator/example.md
+  - plan/checklists/PF01_example_capability.md
+snapshot:
+  baseline_file: notes/catalogs/verification/PF01_snapshot.json
+  require_changes_since_last: false
+  update_command: python3 scripts/update_feature_snapshot.py --feature PF01

@@ -12,10 +12,15 @@ def test_agents_doc_defines_lifecycle_progression_model() -> None:
     assert "## Lifecycle Governance Rule" in text
     assert "## Lifecycle Progression Rule" in text
     assert "## Lifecycle Maturity Ladder" in text
+    assert "## Verification Command Authority Rule" in text
+    assert "## Item-Level Verification Rule" in text
+    assert "## Test Timing Rule" in text
+    assert "## Full-Layer Verification Rule" in text
     assert "`AGENTS.md` defines the always-on doctrine" in text
     assert "`notes/lifecycle/*.md` define the stage-specific standards" in text
     assert "`plan/checklists/00_project_operational_state.md` records which stage" in text
     assert "`plan/tasks/*.md` define the concrete work package" in text
+    assert "`notes/catalogs/checklists/verification_command_catalog.md`" in text
     for stage_name in [
         "`genesis`",
         "`architecture`",
@@ -148,7 +153,9 @@ def test_flow_feature_traceability_assets_reference_product_definition() -> None
     assert "G05 | Product definition is implementation-ready" in traceability_text
     assert "G08 | User-requested product features are explicitly decomposed and traceable" in traceability_text
     assert "product-definition pass before setup" in readme_text
+    assert "## Milestone Gate Model" in readme_text
     assert "## Product Definition Commands" in commands_text
+    assert "## Milestone Gate Commands" in commands_text
     assert "tests/unit/test_user_documentation_docs.py" in commands_text
 
 
@@ -158,3 +165,11 @@ def test_product_definition_stage_requires_original_vision_decomposition() -> No
     assert "## Original Vision Decomposition Rule" in text
     assert "preserves the user-visible intent of each requested capability" in text
     assert "no user-provided feature remains implicit in prose-only form" in text
+
+
+def test_setup_stage_note_defines_entry_gate_requirements() -> None:
+    text = (LIFECYCLE_DIR / "04_stage_03_setup.md").read_text(encoding="utf-8")
+
+    assert "## Entry Gate" in text
+    assert "Setup should not begin merely because a repository has one concept note and one broad task file." in text
+    assert "product's apparent complexity" in text

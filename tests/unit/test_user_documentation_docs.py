@@ -26,15 +26,20 @@ def test_user_documentation_contract_and_docs_tree_exist() -> None:
     readme_text = (REPO_ROOT / "README.md").read_text(encoding="utf-8")
 
     assert "## Required Plan And Checklist Linkage" in contract_text
+    assert "## Feature Contract Alignment" in contract_text
+    assert "## Snapshot Rule" in contract_text
     assert "documentation impact" in contract_text
     assert "documentation verification commands" in contract_text
     assert "`docs/`" in readme_text
     assert "Documentation boundary:" in readme_text
+    assert "git-free comparison of governed files" in readme_text
 
     for path in [
         DOCS_DIR / "README.md",
         DOCS_DIR / "user" / "README.md",
+        DOCS_DIR / "user" / "example.md",
         DOCS_DIR / "operator" / "README.md",
+        DOCS_DIR / "operator" / "example.md",
         DOCS_DIR / "reference" / "README.md",
         DOCS_DIR / "runbooks" / "README.md",
     ]:
@@ -45,6 +50,9 @@ def test_task_plan_schema_requires_documentation_sections() -> None:
     task_readme_text = (TASK_PLANS_DIR / "README.md").read_text(encoding="utf-8")
 
     assert "documentation impact" in task_readme_text
+    assert "notes impact" in task_readme_text
+    assert "checklist impact" in task_readme_text
+    assert "test impact" in task_readme_text
     assert "documentation verification commands" in task_readme_text
 
     for path in TASK_PLANS_DIR.glob("*.md"):
@@ -53,6 +61,9 @@ def test_task_plan_schema_requires_documentation_sections() -> None:
         text = path.read_text(encoding="utf-8")
         assert "## Documentation Impact" in text, f"Missing documentation impact section in {path.name}"
         assert "## Documentation Verification" in text, f"Missing documentation verification section in {path.name}"
+        assert "## Notes Impact" in text, f"Missing notes impact section in {path.name}"
+        assert "## Checklist Impact" in text, f"Missing checklist impact section in {path.name}"
+        assert "## Test Impact" in text, f"Missing test impact section in {path.name}"
 
 
 def test_checklist_traceability_and_command_catalog_reference_docs() -> None:
@@ -74,13 +85,17 @@ def test_checklist_traceability_and_command_catalog_reference_docs() -> None:
 
     assert "user documentation status" in checklist_text
     assert "documentation surfaces" in checklist_text
+    assert "snapshot baseline" in checklist_text
     assert "documentation_required: true" in flow_text
     assert "documentation_surfaces:" in flow_text
     assert "covers_feature_ids" in flow_text
     assert "user_docs" in feature_text
+    assert "Feature definition" in feature_text
     assert "Source vision reference" in feature_text
     assert "G06 | User documentation is first-class and explicitly linked to work" in traceability_text
     assert "## Documentation Consistency Commands" in commands_text
+    assert "## Milestone Gate Commands" in commands_text
+    assert "## Feature Definition And Snapshot Commands" in commands_text
     assert "tests/unit/test_user_documentation_docs.py" in commands_text
 
 
@@ -110,6 +125,7 @@ def test_user_documentation_family_is_authoritative() -> None:
     ).read_text(encoding="utf-8")
 
     assert "user documentation docs" in family_text
+    assert "feature snapshot baselines" in family_text
     assert "task plans should record documentation impact explicitly" in rulebook_text
     assert "starter `docs/` surfaces should exist" in rulebook_text
     assert "tests/unit/test_user_documentation_docs.py" in policy_text

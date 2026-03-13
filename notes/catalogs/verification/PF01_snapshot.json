@@ -1,0 +1,16 @@
+{
+  "feature_id": "PF01",
+  "snapshot_id": "2026-03-13T19:51:34.537387+00:00",
+  "based_on_definition": "plan/features/PF01_example_capability.yaml",
+  "files": {
+    "docs/operator/example.md": "sha256:5edeb6a586359417174a3ce708d8556829db27a198f5d5d1e8161f41b35bf0e3",
+    "docs/reference/README.md": "sha256:1f5da982ca59cb2f1470c831dce18dcc61395c7f8eba0eaf3644539fa90e499d",
+    "docs/user/example.md": "sha256:c8d4cf5d4732a8bdb7241d2c9a70fa59b81e47ce2f9034db052bb526bdc2995e",
+    "notes/catalogs/inventory/major_feature_inventory.md": "sha256:f92facaaf7dc2310fdcaaa14310a823886a36f9897f8780cfc02acf2a2453a84",
+    "notes/logs/features/README.md": "sha256:24b49c6085cccc5b953baaa75337617facea0b50fa0ba90dd9794aecf691fb65",
+    "notes/specs/product/feature_contract_template.md": "sha256:ea97924ca8f7368fd93112e9f7bab1a09743ba9a740b1e474ada5b0a1f7248a8",
+    "plan/checklists/PF01_example_capability.md": "sha256:cb6071a27520280b072d6a3032dd5e2ea7391936c83dd8bfd48f3e85cfd8ac83",
+    "tests/e2e/test_e2e_example_capability.py": "sha256:b6707513bd6d2393196ab59e2f9a696ffa76640d7b68cb7a100c11dcde10e5b2",
+    "tests/unit/test_product_feature_traceability_docs.py": "sha256:1cdddc58c43c26669f3a2d3944acb4af85beba5b50cd353aa5aea2813ff0fe80"
+  }
+}
